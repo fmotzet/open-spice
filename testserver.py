@@ -50,3 +50,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as thisSocket:
             # client_tread.start()
         except Exception as e:
             print(f"An error occurred: {e}")
+#hallo
