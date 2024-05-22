@@ -50,7 +50,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         mystring = input("Enter something:")
         if mystring == "you":
             mystring = myWinInfo
-
+        if mystring == "done":
+            break
         s.sendall((mystring).encode("utf-8"))
         data = s.recv(1024)
 
