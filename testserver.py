@@ -1,5 +1,8 @@
 import socket
 import threading
+import json
+import pprint
+pp= pprint.PrettyPrinter(indent=4)
 
 host = "127.0.0.1"
 port = 65432
@@ -10,7 +13,7 @@ def handle_client(conn, addr):
     with conn:
         while True:
             try: 
-                data = conn.recv(1024)
+                data = conn.recv(4096*8)
                 if not data:
                     break
                 if data == b"bye":
@@ -23,7 +26,12 @@ def handle_client(conn, addr):
                     conn.close()
                     exit(0)
                 else:
-                    print(data)
+                    try: 
+                        print(json.loads(data.decode("utf-8")))
+                    except:
+                        print("decode failed")
+                        print(data)
+                        print(type(data))
                     conn.sendall(b"received...")
             except Exception as e:
                 print(f"An error occurred: {e}")  

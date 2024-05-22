@@ -37,7 +37,7 @@ def collector():
     # pp.pprint(thisComputerName)
     # pp.pprint(thisWinInfo)
     # pp.pprint(allSoftware)
-    return(thisComputerName)
+    return(finalDict)
 
 if type(collector()) == dict or list:
     myWinInfo = json.dumps(collector())
@@ -50,9 +50,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         mystring = input("Enter something:")
         if mystring == "you":
             mystring = myWinInfo
-        if mystring == "done":
+            print(json.dumps(myWinInfo).encode())
+            s.sendall(json.dumps(myWinInfo).encode("utf-8"))
+        elif mystring == "done":
             break
-        s.sendall((mystring).encode("utf-8"))
+        else:
+            s.sendall((mystring).encode("utf-8"))
         data = s.recv(1024)
 
         if data == (b"terminting connection"):
