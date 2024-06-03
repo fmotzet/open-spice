@@ -31,12 +31,6 @@ def collector():
     thisWinInfo = runAndConvert(windowsInfoCommand)
     
     finalDict = {thisComputerName['ComputerName']:[thisWinInfo,allSoftware]}
-    
-    #print (finalDict)
-    # print(type(allSoftware))
-    # pp.pprint(thisComputerName)
-    # pp.pprint(thisWinInfo)
-    # pp.pprint(allSoftware)
     return(finalDict)
 
 if type(collector()) == dict or list:
@@ -50,8 +44,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         mystring = input("Enter something:")
         if mystring == "you":
             mystring = myWinInfo
-            print(json.dumps(myWinInfo).encode())
-            s.sendall(json.dumps(myWinInfo).encode("utf-8"))
+            print(myWinInfo).encode()
+            s.sendall(myWinInfo).encode("utf-8")
         elif mystring == "done":
             break
         else:
